@@ -41,7 +41,10 @@
 						</div>
 					</div>
                     <div class="row" style="margin-top: 30px;">
-						<div class="col-8">
+						<div class="col-4">
+							<input type="text" id="item_id" name="item_id" class="form-control" placeholder="Item Code" autofocus="autofocus">
+						</div>
+						<div class="col-4">
 							<input type="text" id="item_code" name="item_code" class="form-control" placeholder="Item Code / Item Name" autofocus="autofocus">
 						</div>
 						<div class="col-4">
@@ -129,10 +132,11 @@
 	const ms2 = document.getElementById("modal-failed");
     const toAddress = document.getElementById("to_address");
     const item_code = document.getElementById("item_code");
+    const item_id = document.getElementById("item_id");
 	const c1 = document.getElementById("c1");
     var datax = [];
 	var pdo_id = 0;
-	function getItem(me, val){
+	function getItem(me = null, val){
 		const params = {
 			act: "v",
 			item_code: val
@@ -169,11 +173,13 @@
 			}
 			
 		});
-		var i = "<i class='fa fa-check'></i>"
-        $(me).html(i)
-        $(me).prop('disabled', true)
-        $(me).removeClass("btn-primary")
-        $(me).addClass("btn-success")
+		if(me != null){
+			var i = "<i class='fa fa-check'></i>"
+			$(me).html(i)
+			$(me).prop('disabled', true)
+			$(me).removeClass("btn-primary")
+			$(me).addClass("btn-success")
+		}
 	}
 
 	function _close_modal(){
@@ -273,6 +279,32 @@
 			}
 			
 		});
+
+		item_id.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				if(item_id.value){
+					getItem(null, item_id.value);
+					item_id.value = "";
+					item_id.focus();
+				} else {
+					alert("nga bboleh kosong");
+					item_id.focus();
+				}
+			}
+			
+		});
+
+		$("#item_id").on("paste", function(e) {
+			var pastedData = e.originalEvent.clipboardData.getData('text');
+			if(pastedData){
+				getItem(null, pastedData);
+				item_id.value = "";
+				item_id.focus();
+			} else {
+				alert("nga bboleh kosong");
+				item_id.focus();
+			}
+		});
         const params = {
 			// act: "v",
 			// do_id: "v"
@@ -307,7 +339,6 @@
     })
 
 	$(document).ready(function(){
-		console.log("test")
 		$("#c1").click(function(){
 			console.log("test")
             var item_code = $("#item_code").val()
