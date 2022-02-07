@@ -20,7 +20,7 @@
             $param = $object['param'];
             $row = [];
             if(!empty($param)){
-                $sql = "SELECT item_code, name from asset_items";
+                $sql = "SELECT item_code, name, uom, notes, item_series, serial_number, specification from asset_items";
                 $sql .= " WHERE (item_code like '%$param%'";
                 $sql .= " OR name like '%$param%')";
                 $sql .= " AND deleted_at is null";
@@ -32,6 +32,8 @@
                         $col = [];
                         $col['item_code'] = $rsql->fields('item_code');
                         $col['name'] = $rsql->fields('name');
+                        $col['uom'] = $rsql->fields('uom');
+                        $col['detail'] = $rsql->fields('serial_number')."<br>".$rsql->fields('item_series')."<br>".$rsql->fields('notes')."</br>".$rsql->fields('specification');
                         $row[] = $col;
                         $rsql->MoveNext();
                     }

@@ -74,7 +74,7 @@
 	</div>
 </div>
 <div id="myModal" class="modal" style="overflow: auto" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
@@ -87,8 +87,9 @@
                     <tr>
                         <th>ITEM CODE</th>
                         <th>ITEM NAME</th>
+                        <th>UOM</th>
+                        <th>NOTES</th>
                         <th>QTY</th>
-                        <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -214,8 +215,9 @@
                             t_item.row.add([
                                 "<span class='item_code'>"+value.item_code+"</span>",
                                 "<span class='name'>"+value.name+"</span>",
-                                "<input type='text' class='form-control qty' value='1'>",
-                                "<button type='button' onclick='add_to_print(this)' class='btn btn-primary'>Add to Print</button>"
+                                "<span class='uom'>"+value.uom+"</span>",
+                                "<span class='uom'>"+value.detail+"</span>",
+                                "<input type='text' class='form-control qty' value='1'>" + "<button type='button' onclick='add_to_print(this)' class='btn btn-primary'>Add to Print</button>",
                             ]).draw()
                         })
                     }

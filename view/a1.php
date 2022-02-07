@@ -67,7 +67,17 @@ vertical-align: middle;">
 	       </div>
 	    </div>
 	</div>
-</div>	
+</div>
+<div class="row">
+	<div class="col-6">
+		<div class="PRINT small-box cursor-pointer" id="refresh" style="height:70px;">
+	      <div class="inner" style="text-align: center;
+vertical-align: middle;">
+	        <h1 style="font-size: 29px;">REFRESH</h1>
+	       </div>
+	    </div>
+	</div>
+</div>
 <script type="text/javascript">
 	(function() {
 		var iN = document.getElementById("mint");
@@ -87,6 +97,11 @@ vertical-align: middle;">
 		var _do = document.getElementById("do")
 		_do.onclick = () => {
 			window.location.href = "http://localhost/assetgateway/?m=do";
+		}
+
+		var _refresh = document.getElementById("refresh")
+		_refresh.onclick = () => {
+			window.location.href = "http://localhost/assetgateway/item/refresh.php";
 		}
 	})();
 </script>
