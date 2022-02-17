@@ -84,7 +84,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="navbar-brand"></div>
       <span class="navbar-text">
         Last Syncronize : <span id="last-sync"></span>
-        <button type="button" class="btn btn-primary" onclick="_sync()"><i class="fa fa-refresh"></i> Click here to sync</button>
       </span>
     </div>
   </nav>
@@ -172,8 +171,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $(document).ready(function(){
     _get_last_update()
     setInterval(() => {
-      
-    }, 20000);
+        _sync()
+    }, 60000);
   })
 </script>
 </body>
