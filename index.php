@@ -73,13 +73,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
       }
     });
   </script>
+  <script src="dist/js/jquery-1.11.0.min.js"></script>
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper"  >
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-    <div class="container" style="height:30px;">
+    <div class="container" style="height:30px; display : '';">
+      <div class="navbar-brand"></div>
+      <span class="navbar-text">
+        Last Syncronize : <span id="last-sync"></span>
+        <button type="button" class="btn btn-primary" onclick="_sync()"><i class="fa fa-refresh"></i> Click here to sync</button>
+      </span>
     </div>
   </nav>
   <!-- /.navbar -->
@@ -137,6 +143,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- jQuery -->
 <div class="loading-clock"></div>
+<script>
 
+  function _get_last_update(){
+    $.ajax({
+        url : "http://localhost/assetgateway/pr/last_update_do.php",
+        type : "GET",
+        dataType : "json",
+        success : function(response){
+          $("#last-sync").text(response)
+        }
+    })
+  }
+
+  function _sync(){
+    $.ajax({
+        url : "http://localhost/assetgateway/pr/sync_do.php",
+        type : "GET",
+        dataType : "json",
+        success : function(response){
+            if(response.success){
+              _get_last_update()
+            }
+        }
+    })
+  }
+
+  $(document).ready(function(){
+    _get_last_update()
+    setInterval(() => {
+      
+    }, 20000);
+  })
+</script>
 </body>
 </html>

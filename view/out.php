@@ -41,11 +41,25 @@
 						</div>
 					</div>
                     <div class="row" style="margin-top: 30px;">
-						<div class="col-8">
-							<input type="text" id="item_code" name="item_code" class="form-control" placeholder="Item Code / Item Name" autofocus="autofocus">
+						<div class="col-6">
+							<div class="row">
+								<div class="col-8">
+									<input type="text" id="icode" name="icode" class="form-control" placeholder="Item Code" autofocus="autofocus">
+								</div>
+								<div class="col-4">
+									<input type='button' id="c2" value='Cek'>
+								</div>
+							</div>
 						</div>
-						<div class="col-4">
-							<input type='button' id="c1" value='Cek'>
+						<div class="col-6">
+							<div class="row">
+								<div class="col-8">
+									<input type="text" id="item_code" name="item_code" class="form-control" placeholder="Item Code / Item Name" autofocus="autofocus">
+								</div>
+								<div class="col-4">
+									<input type='button' id="c1" value='Cek'>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="row" style="margin-top: 30px; overflow: auto;">
@@ -119,7 +133,6 @@
   </div>
 
 </div>
-<script src="dist/js/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="dist/DataTables/datatables.min.js"></script>
 <script type="text/javascript" src="dist/js/select2.full.js"></script>
 <script type="text/javascript">
@@ -169,11 +182,6 @@
 			}
 			
 		});
-		var i = "<i class='fa fa-check'></i>"
-        $(me).html(i)
-        $(me).prop('disabled', true)
-        $(me).removeClass("btn-primary")
-        $(me).addClass("btn-success")
 	}
 
 	function _close_modal(){
@@ -308,6 +316,17 @@
 
 	$(document).ready(function(){
 		console.log("test")
+		$("#c2").click(function(){
+			var item_code = $("#icode").val()
+			getItem($(this), item_code)
+		})
+
+		$("#icode").on("keyup", function(e){
+			if(e.keyCode === 13){
+				$("#c2").click()
+			}
+		})
+
 		$("#c1").click(function(){
 			console.log("test")
             var item_code = $("#item_code").val()

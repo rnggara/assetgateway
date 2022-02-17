@@ -20,7 +20,7 @@
             $row = [];
             $sql = "SELECT id, no_do_local, (SELECT name FROM asset_wh where asset_wh.id = do.to_id) as wh_destination from do";
             $sql .= " WHERE deleted_at is null";
-            $sql .= " AND no_do_local is not null";
+            $sql .= " AND no_do_local is not null and no_do is null";
             $rsql = $db->Execute($sql);
             if($rsql){
                 $count = $rsql->RecordCount();
